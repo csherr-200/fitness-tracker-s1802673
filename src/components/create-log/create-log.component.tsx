@@ -67,6 +67,8 @@ const TicketForm = () => {
                 },
                 title,
                 activityGoals,
+                predictedDistance,
+                actualDistance,
                 createdAt,
                 status: "open",
                 comments: [],
@@ -123,7 +125,7 @@ const TicketForm = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="priority">Predicted Distance</label>
+                    <label htmlFor="predictedDistance">Predicted Distance</label>
                     <textarea
                         className="form-control"
                         name="predictedDistance"

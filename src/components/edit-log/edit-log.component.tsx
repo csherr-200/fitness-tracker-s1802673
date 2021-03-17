@@ -98,6 +98,7 @@ const EditTicket = () => {
                             title,
                             activityGoals,
                             predictedDistance,
+                            actualDistance,
                             updatedAt,
                             logs: [
                                 ...logsArr,
