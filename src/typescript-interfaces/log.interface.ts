@@ -1,18 +1,16 @@
 import { firestore } from "firebase";
 
-export interface Ticket {
+export interface Log {
   id: string;
   title: string;
-  description: string;
-  priority: string;
-  environment: string;
-  status: string;
+  activityGoals  : string;
+  predictedDistance: string;
+  actualDistance: string;
   owner: {
     displayName: string;
     email: string;
     id: string;
   };
-  assignee: string,
   createdAt: string;
   logs: Array<{
     personName: string;

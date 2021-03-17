@@ -4,14 +4,14 @@ import "firebase/auth";
 import "firebase/storage";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyA5N0wGhJ045rkVZ0iiYpB7z0Y90htYkv0",
-    authDomain: "bug-tracker-ssd.firebaseapp.com",
-    databaseURL: "https://bug-tracker-ssd.firebaseio.com",
-    projectId: "bug-tracker-ssd",
-    storageBucket: "bug-tracker-ssd.appspot.com",
-    messagingSenderId: "965052790632",
-    appId: "1:965052790632:web:581d18ed83e165b8e248dd",
-    measurementId: "G-08MV79QHXZ"
+    apiKey: "AIzaSyDPHWa5tIq5AHq2bKuTQC8PoMxRNLQxwGI",
+    authDomain: "ssd-cw2-bugtracker.firebaseapp.com",
+    databaseURL: "https://ssd-cw2-bugtracker.firebaseio.com",
+    projectId: "ssd-cw2-bugtracker",
+    storageBucket: "ssd-cw2-bugtracker.appspot.com",
+    messagingSenderId: "619846878427",
+    appId: "1:619846878427:web:ddda36ab9f2563ea96f8fe",
+    measurementId: "G-GY50B4ZNPR"
 };
 
 firebase.initializeApp(firebaseConfig);

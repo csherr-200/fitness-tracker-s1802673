@@ -15,8 +15,8 @@ const Navbar = () => {
     return (
         <div className={"bootstrap-navbar"}>
             <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-                <Link to={"/bug-tracker"} className={"navbar-brand"}>
-                    SSTS BUG TRACKER
+                <Link to={"/fitness-tracker"} className={"navbar-brand"}>
+                    FITNESS TRACKER
                 </Link>
                 <button
                     className="navbar-toggler"
@@ -27,20 +27,20 @@ const Navbar = () => {
                     <ul className="navbar-nav">
                         <li
                             className={`nav-item ${
-                                history.location.pathname === "bug-tracker/new-ticket" ? "active" : ""
+                                history.location.pathname === "fitness-tracker/new-log" ? "active" : ""
                             }`}
                         >
-                            <Link to={"/bug-tracker/new-ticket"} className={"nav-link"}>
-                                Create Ticket <span className="sr-only">(current)</span>
+                            <Link to={"/fitness-tracker/new-log"} className={"nav-link"}>
+                                Create New Fitness Log <span className="sr-only">(current)</span>
                             </Link>
                         </li>
                         <li
                             className={`nav-item ${
-                                history.location.pathname === "bug-tracker/new-ticket" ? "active" : ""
+                                history.location.pathname === "fitness-tracker/new-log" ? "active" : ""
                             }`}
                         >
-                            <Link to={"/bug-tracker/view-tickets?type=all"} className={"nav-link"}>
-                                View Tickets <span className="sr-only">(current)</span>
+                            <Link to={"/fitness-tracker/view-logs?type=all"} className={"nav-link"}>
+                                View All Previous Logs <span className="sr-only">(current)</span>
                             </Link>
                         </li>
                         <li
@@ -52,7 +52,7 @@ const Navbar = () => {
                         >
                             {!currentUser.email && (
                                 <Link
-                                    to={"/bug-tracker/register-and-login"}
+                                    to={"/fitness-tracker/register-and-login"}
                                     className={"nav-link"}
                                 >
                                     Login and Register
@@ -66,7 +66,7 @@ const Navbar = () => {
                                     style={{cursor: "pointer"}}
                                     onClick={() => {
                                         auth.signOut();
-                                        history.push("/bug-tracker");
+                                        history.push("/fitness-tracker");
                                         refreshComponent();
                                     }}
                                 >

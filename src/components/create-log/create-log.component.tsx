@@ -9,23 +9,22 @@ import {useHistory} from "react-router-dom";
 
 const TicketForm = () => {
     const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [priority, setPriority] = useState("");
-    const [environment, setEnvironment] = useState("");
-    const [assignee, setAssignee] = useState("")
+    const [activityGoals, setActivityGoals] = useState("");
+    const [predictedDistance, setPredictedDistance] = useState("");
+    const [actualDistance, setActualDistance] = useState("");
     const currentUser: CurrentUser = useContext(CurrentUserContext);
 
     const history = useHistory();
     var user = firestoreAuth.auth().currentUser
 
-    function loginCheck() {
-        if (user == null) {
-            alert("Please Login")
-            history.push("/")
-        }
-    }
-
-    loginCheck()
+    // function loginCheck() {
+    //     if (user == null) {
+    //         alert("Please Login")
+    //         history.push("/")
+    //     }
+    // }
+    //
+    // loginCheck()
 
     const handleChange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -36,20 +35,16 @@ const TicketForm = () => {
                 setTitle(value);
                 break;
 
-            case "description":
-                setDescription(value);
+            case "activityGoals":
+                setActivityGoals(value);
                 break;
 
-            case "priority":
-                setPriority(value);
+            case "predictedDistance":
+                setPredictedDistance(value);
                 break;
 
-            case "environment":
-                setEnvironment(value);
-                break;
-
-            case "assignee":
-                setAssignee(value);
+            case "actualDistance":
+                setActualDistance(value);
                 break;
 
             default:
@@ -71,19 +66,16 @@ const TicketForm = () => {
                     email: currentUser.email,
                 },
                 title,
-                description,
-                priority,
-                environment,
+                activityGoals,
                 createdAt,
                 status: "open",
-                assignee,
                 comments: [],
             })
             .then(() => {
                 setTitle("");
-                setDescription("");
-                setPriority("");
-                setEnvironment("")
+                setActivityGoals("");
+                setPredictedDistance("");
+                setActualDistance("");
             })
             .catch(function (error) {
                 console.error("Error creating ticket: ", error);
@@ -105,10 +97,10 @@ const TicketForm = () => {
             className={"pt-3 pl-2 pr-2 mt-5"}
             style={{minHeight: "75vh"}}
         >
-            <h1 className={"text-center"}>Raising a new ticket</h1>
+            <h1 className={"text-center"}>Create a New Fitness Log</h1>
             <form className={"mb-5"} onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="ticketTitle">Title</label>
+                    <label htmlFor="ticketTitle">Week Starting</label>
                     <input
                         type="text"
                         name="title"
@@ -120,61 +112,27 @@ const TicketForm = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="bugDescription">Description</label>
+                    <label htmlFor="activityGoals">Activity Goals</label>
                     <textarea
                         className="form-control"
-                        name="description"
-                        id="bugDescription"
-                        placeholder="Insert Error Description here"
-                        value={description}
+                        name="activityGoals"
+                        id="activityGoals"
+                        placeholder="Insert Activity Goals here"
+                        value={activityGoals}
                         onChange={handleChange}
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="priority">Priority</label>
-                    <select
+                    <label htmlFor="priority">Predicted Distance</label>
+                    <textarea
                         className="form-control"
-                        name="priority"
-                        id="priority"
-                        value={priority}
+                        name="predictedDistance"
+                        id="predictedDistance"
+                        placeholder="Enter Predicted Distance here"
+                        value={predictedDistance}
                         onChange={handleChange}
                     >
-                        <option>--Select--</option>
-                        <option>High</option>
-                        <option>Medium</option>
-                        <option>Low</option>
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="environment">Environment</label>
-                    <select
-                        className="form-control"
-                        name="environment"
-                        id="environment"
-                        value={environment}
-                        onChange={handleChange}
-                    >
-                        <option>--Select--</option>
-                        <option>Production</option>
-                        <option>Testing</option>
-                        <option>Development</option>
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="assignee">Assign To: </label>
-                    <select
-                        className="form-control"
-                        name="assignee"
-                        id="assignee"
-                        value={assignee}
-                        onChange={handleChange}
-                    >
-                        <option>--Select--</option>
-                        <option>David Turnbull</option>
-                        <option>Max Power</option>
-                        <option>Nick Chubb</option>
-                        <option>Derek Henry</option>
-                    </select>
+                    </textarea>
                 </div>
                 <button type={"submit"} className={"btn btn-danger"}>
                     Submit

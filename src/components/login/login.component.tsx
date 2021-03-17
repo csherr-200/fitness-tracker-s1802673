@@ -9,7 +9,7 @@ interface UserLogin {
 const Login = () => {
     const history = useHistory();
     const [userCredentials, setUserCredentials] = useState({
-        email: "callum@safari.com",
+        email: "callum@test.com",
         password: "12345678",
     });
 
@@ -31,7 +31,7 @@ const Login = () => {
                 email: "",
                 password: "",
             });
-            history.push("/bug-tracker/new-ticket");
+            history.push("/fitness-tracker/new-log");
         } catch (error) {
             console.error("Couldn't login user: ", error);
         }

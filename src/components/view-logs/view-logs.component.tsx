@@ -4,7 +4,7 @@ import {Link, useHistory, useLocation} from "react-router-dom";
 import { firestore as db } from "../../firebase/firebase.utils";
 import CurrentUserContext from "../../typescript-interfaces/current-user.provider";
 import { CurrentUser } from "../../typescript-interfaces/current-user.interface";
-import { Ticket } from "../../typescript-interfaces/ticket.interface";
+import { Log } from "../../typescript-interfaces/log.interface";
 import firestoreAuth from "firebase";
 
 const useQuery = () => {
@@ -15,26 +15,26 @@ const ViewTickets = () => {
   let query = useQuery();
   let type = query.get("type");
 
-  const [ticketsList, setTicketsList] = useState<Array<Ticket>>([]);
+  const [ticketsList, setTicketsList] = useState<Array<Log>>([]);
 
   const currentUser: CurrentUser = useContext(CurrentUserContext);
 
   const history = useHistory();
   var user = firestoreAuth.auth().currentUser
 
-  function loginCheck() {
-    if (user == null) {
-      alert("Please Login")
-      history.push("/")
-    }
-  }
-
-  loginCheck()
+  // function loginCheck() {
+  //   if (user == null) {
+  //     alert("Please Login")
+  //     history.push("/")
+  //   }
+  // }
+  //
+  // loginCheck()
 
   useEffect(() => {
     setTicketsList([]);
 
-    let ticketsArray: Array<Ticket> = [];
+    let ticketsArray: Array<Log> = [];
 
     db.collection("tickets")
         .orderBy("createdAt", "desc")
@@ -43,28 +43,24 @@ const ViewTickets = () => {
           querySnapshot.forEach((doc) => {
             const {
               title,
-              description,
-              priority,
-              environment,
-              status,
+              activityGoals,
+              predictedDistance,
+              actualDistance,
               owner,
-              assignee,
-              createdAt,
               logs,
+              createdAt,
               comments,
             } = doc.data();
 
             ticketsArray.push({
               id: doc.id,
               title,
-              description,
-              priority,
-              environment,
-              status,
+              activityGoals,
+              predictedDistance,
+              actualDistance,
               owner,
-              assignee,
-              createdAt,
               logs,
+              createdAt,
               comments,
             });
           });
@@ -92,15 +88,13 @@ const ViewTickets = () => {
       <div
           className="pt-5 pb-2 mt-5"
       >
-        <h2 className={"text-center"}>Bug Tickets</h2>
+        <h2 className={"text-center"}>Fitness Logs</h2>
         {ticketsList.length > 0 ? (
             <table className="table table-bordered table-striped table-light">
               <thead className="thead-light">
               <tr>
-                <th scope="col">Ticket No.</th>
-                <th scope="col">Bug Title</th>
-                <th scope="col">Priority</th>
-                <th scope="col">Status</th>
+                <th scope="col">Log No.</th>
+                <th scope="col">Log Week</th>
               </tr>
               </thead>
               <tbody>
@@ -110,19 +104,17 @@ const ViewTickets = () => {
                     <td>
                       <Link
                           className={"text-dark"}
-                          to={`/bug-tracker/ticket-details/${ticket.id}`}
+                          to={`/fitness-tracker/log-logs/${ticket.id}`}
                       >
                         {ticket.title}
                       </Link>
                     </td>
-                    <td>{ticket.priority}</td>
-                    <td>{ticket.status}</td>
                   </tr>
               ))}
               </tbody>
             </table>
         ) : (
-            <h2 className={"text-center pt-5"}>No tickets found</h2>
+            <h2 className={"text-center pt-5"}>No Logs Found</h2>
         )}
       </div>
   );

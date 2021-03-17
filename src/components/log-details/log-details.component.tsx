@@ -2,7 +2,7 @@ import { firestore } from "firebase";
 import { firestore as db } from "../../firebase/firebase.utils";
 import React, { useContext, useEffect, useState } from "react";
 import {Link, useHistory, useParams} from "react-router-dom";
-import { Ticket } from "../../typescript-interfaces/ticket.interface";
+import { Log } from "../../typescript-interfaces/log.interface";
 import CurrentUserContext from "../../typescript-interfaces/current-user.provider";
 import { CurrentUser } from "../../typescript-interfaces/current-user.interface";
 import firestoreAuth from "firebase";
@@ -20,22 +20,19 @@ const TicketDetailsPage = () => {
   const currentUser: CurrentUser = useContext(CurrentUserContext);
 
   const [refresh, setRefresh] = useState(true);
-  const [assignee, setAssignee] = useState("")
   const [status, setStatus] = useState("");
   const [comment, setcomment] = useState("");
-  const [ticket, setTicket] = useState<Ticket>({
+  const [ticket, setTicket] = useState<Log>({
     id: "",
     title: "",
-    description: "",
-    environment: "",
-    priority: "",
-    status: "",
+    activityGoals: "",
+    predictedDistance: "",
+    actualDistance: "",
     owner: {
       displayName: "",
       email: "",
       id: "",
     },
-    assignee: "",
     createdAt: "",
     logs: [],
     comments: [],
@@ -44,14 +41,14 @@ const TicketDetailsPage = () => {
   const history = useHistory();
   var user = firestoreAuth.auth().currentUser
 
-  function loginCheck() {
-    if (user == null) {
-      alert("Please Login")
-      history.push("/")
-    }
-  }
-
-  loginCheck()
+  // function loginCheck() {
+  //   if (user == null) {
+  //     alert("Please Login")
+  //     history.push("/")
+  //   }
+  // }
+  //
+  // loginCheck()
 
   useEffect(() => {
     db.collection("tickets")
@@ -61,12 +58,10 @@ const TicketDetailsPage = () => {
           if (doc.exists) {
             const {
               title,
-              description,
-              priority,
-              environment,
-              status,
+              activityGoals,
+              predictedDistance,
+              actualDistance,
               owner,
-              assignee,
               createdAt,
               logs,
               comments,
@@ -74,17 +69,14 @@ const TicketDetailsPage = () => {
             setTicket({
               id: doc.id,
               title,
-              description,
-              priority,
-              environment,
-              status,
+              activityGoals,
+              predictedDistance,
+              actualDistance,
               owner,
-              assignee,
               createdAt: createdAt.toDate().toString(),
               logs,
               comments,
             });
-            setAssignee(assignee);
             setStatus(status);
           } else {
             // doc.data() will be undefined in this case
@@ -113,7 +105,6 @@ const TicketDetailsPage = () => {
   };
 
   const handleSubmitComment = (event: React.FormEvent) => {
-    if (status !== 'closed') {
       event.preventDefault();
 
       let commentsArray: Array<Comment> = [];
@@ -146,9 +137,7 @@ const TicketDetailsPage = () => {
                   refreshComponent();
                 });
           })
-    } else {
-      alert('Ticket in Closed Status cannot Comment')
-    }
+
   };
 
   return (
@@ -157,9 +146,9 @@ const TicketDetailsPage = () => {
           style={{ minHeight: "81vh" }}
       >
         <h2 className={"text-center"}>
-          Ticket Details Page{" "}
+          Log Details{" "}
           {currentUser.id === ticket.owner.id ? (
-              <Link to={`/bug-tracker/edit-ticket/${ticket.id}`}>
+              <Link to={`/fitness-tracker/edit-ticket/${ticket.id}`}>
                 <button className="btn btn-warning border-dark">Edit Ticket</button>
               </Link>
           ) : undefined}
@@ -167,31 +156,25 @@ const TicketDetailsPage = () => {
         <div className="card border-dark mb-5">
           <ul className="list-group">
             <li className="list-group-item">
-              Ticket ID: {ticketId}
+              Log ID: {ticketId}
             </li>
             <li className="list-group-item">
-              Title: {ticket.title}
+              Date: {ticket.title}
             </li>
             <li className="list-group-item">
-              Description: {ticket.description}
+              Activity Goals {ticket.activityGoals}
             </li>
             <li className="list-group-item">
-              Priority: {ticket.priority}
+              Predicted Distance: {ticket.predictedDistance}
+            </li>
+            <li className="list-group-item">
+                Actual Distance: {ticket.actualDistance}
             </li>
             <li className="list-group-item">
               Created At: {ticket.createdAt}
             </li>
             <li className="list-group-item">
-              Created By: {ticket.owner.displayName}
-            </li>
-            <li className="list-group-item">
-              Environment: {ticket.environment}
-            </li>
-            <li className="list-group-item">
-              Asignee: {assignee}
-            </li>
-            <li className="list-group-item">
-              Status: {ticket.status}
+              Created By: {ticket.owner.email}
             </li>
           </ul>
         </div>
