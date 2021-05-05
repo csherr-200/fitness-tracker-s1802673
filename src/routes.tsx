@@ -7,6 +7,7 @@ import ViewTickets from "./components/view-logs/view-logs.component";
 import {auth, createUserProfileDocument} from "./firebase/firebase.utils";
 import Login from "./components/login/login.component";
 import LogDetailsPage from "./components/log-details/log-details.component";
+import Compare from "./components/compare/compare.component"
 import CurrentUserContext from "./typescript-interfaces/current-user.provider";
 import {CurrentUser} from "./typescript-interfaces/current-user.interface";
 
@@ -58,9 +59,11 @@ const Routes = () => {
                             component={CreateLog}
                         />
                         <Route path={"/fitness-tracker/view-logs"} component={ViewTickets}/>
-                        <Route exact path={"/fitness-tracker/log-logs/:ticketId"} component={LogDetailsPage}
+                        <Route exact path={"/fitness-tracker/view-log/:ticketId"} component={LogDetailsPage}
                         />
                         <Route exact path={"/fitness-tracker/edit-ticket/:ticketId"} component={EditLogs}
+                        />
+                        <Route exact path={"/fitness-tracker/compare"} component={Compare}
                         />
                     </Switch>
                 </BrowserRouter>

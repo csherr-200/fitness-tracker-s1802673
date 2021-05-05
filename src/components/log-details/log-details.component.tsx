@@ -20,7 +20,6 @@ const TicketDetailsPage = () => {
   const currentUser: CurrentUser = useContext(CurrentUserContext);
 
   const [refresh, setRefresh] = useState(true);
-  const [status, setStatus] = useState("");
   const [comment, setcomment] = useState("");
   const [ticket, setTicket] = useState<Log>({
     id: "",
@@ -28,6 +27,8 @@ const TicketDetailsPage = () => {
     activityGoals: "",
     predictedDistance: "",
     actualDistance: "",
+    startDate: "",
+    endDate: "",
     owner: {
       displayName: "",
       email: "",
@@ -38,8 +39,8 @@ const TicketDetailsPage = () => {
     comments: [],
   });
 
-  const history = useHistory();
-  var user = firestoreAuth.auth().currentUser
+  // const history = useHistory();
+  // var user = firestoreAuth.auth().currentUser
 
   // function loginCheck() {
   //   if (user == null) {
@@ -61,6 +62,8 @@ const TicketDetailsPage = () => {
               activityGoals,
               predictedDistance,
               actualDistance,
+              startDate,
+              endDate,
               owner,
               createdAt,
               logs,
@@ -72,12 +75,13 @@ const TicketDetailsPage = () => {
               activityGoals,
               predictedDistance,
               actualDistance,
+              startDate: startDate.toDate().toString(),
+              endDate: endDate.toDate().toString(),
               owner,
               createdAt: createdAt.toDate().toString(),
               logs,
               comments,
             });
-            setStatus(status);
           } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
@@ -149,7 +153,7 @@ const TicketDetailsPage = () => {
           Log Details{" "}
           {currentUser.id === ticket.owner.id ? (
               <Link to={`/fitness-tracker/edit-ticket/${ticket.id}`}>
-                <button className="btn btn-warning border-dark">Edit Ticket</button>
+                <button className="btn btn-warning border-dark">Edit Log</button>
               </Link>
           ) : undefined}
         </h2>
@@ -174,7 +178,13 @@ const TicketDetailsPage = () => {
               Created At: {ticket.createdAt}
             </li>
             <li className="list-group-item">
-              Created By: {ticket.owner.email}
+              Start Date: {ticket.startDate}
+            </li>
+            <li className="list-group-item">
+              End Date: {ticket.endDate}
+            </li>
+            <li className="list-group-item">
+              Owner: {ticket.owner.email}
             </li>
           </ul>
         </div>

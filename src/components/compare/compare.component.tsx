@@ -11,7 +11,7 @@ interface Log {
     timestamp: firestore.Timestamp;
 }
 
-const EditTicket = () => {
+const Compare = () => {
     const [title, setTitle] = useState("");
     const [activityGoals, setActivityGoals] = useState("");
     const [predictedDistance, setPredictedDistance] = useState("");
@@ -28,22 +28,22 @@ const EditTicket = () => {
         }
     }
 
-    loginCheck()
+    // loginCheck()
 
     let currentUser: CurrentUser = useContext(CurrentUserContext);
 
-    useEffect(() => {
-        db.collection("tickets")
-            .doc(ticketId)
-            .get()
-            .then((doc: firestore.DocumentData) => {
-                const {title, activityGoals, predictedDistance, actualDistance} = doc.data();
-                setTitle(title);
-                setActivityGoals(activityGoals);
-                setPredictedDistance(predictedDistance);
-                setActualDistance(actualDistance)
-            })
-    }, [ticketId]);
+    // useEffect(() => {
+    //     db.collection("tickets")
+    //         .doc(ticketId)
+    //         .get()
+    //         .then((doc: firestore.DocumentData) => {
+    //             const {title, activityGoals, predictedDistance, actualDistance} = doc.data();
+    //             setTitle(title);
+    //             setActivityGoals(activityGoals);
+    //             setPredictedDistance(predictedDistance);
+    //             setActualDistance(actualDistance)
+    //         })
+    // }, [ticketId]);
 
     const handleChange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -129,9 +129,10 @@ const EditTicket = () => {
             className={"pt-3 pl-2 pr-2 mt-5 mr-3 ml-3"}
             style={{minHeight: "86vh"}}
         >
-            <h1 className={"text-center"}>Updating Log</h1>
+            <h1 className={"text-center"}>Compare Logs</h1>
             <form className={"mb-5"} onSubmit={handleSubmit}>
                 <div className="form-group">
+                    <label htmlFor="ticketTitle">Week Start Date</label>
                     <input
                         type="text"
                         name="title"
@@ -141,6 +142,18 @@ const EditTicket = () => {
                         value={title}
                         onChange={handleChange}
                     />
+                <div className="form-group">
+                    <label htmlFor="ticketTitle">Title</label>
+                    <input
+                        type="text"
+                        name="title"
+                        className="form-control"
+                        id="ticketTitle"
+                        placeholder="Issue title here..."
+                        value={title}
+                        onChange={handleChange}
+                    />
+                </div>
                 </div>
                 <div className="form-group">
                     <label htmlFor="activityGoals">Activity Goals</label>
@@ -183,4 +196,4 @@ const EditTicket = () => {
     );
 };
 
-export default EditTicket;
+export default Compare;

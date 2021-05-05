@@ -3,8 +3,11 @@ import CurrentUserContext from "../../typescript-interfaces/current-user.provide
 import {CurrentUser} from "../../typescript-interfaces/current-user.interface";
 import {v4} from "uuid";
 import {firestore as db} from "../../firebase/firebase.utils";
-import firestoreAuth from "firebase";
-import {useHistory} from "react-router-dom";
+import 'react-day-picker/lib/style.css';
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css';
+import DayPickerInput from "react-day-picker/DayPickerInput";
+import "react-day-picker/lib/style.css";
 
 
 const TicketForm = () => {
@@ -12,11 +15,14 @@ const TicketForm = () => {
     const [activityGoals, setActivityGoals] = useState("");
     const [predictedDistance, setPredictedDistance] = useState("");
     const [actualDistance, setActualDistance] = useState("");
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
+
     const currentUser: CurrentUser = useContext(CurrentUserContext);
 
-    const history = useHistory();
-    var user = firestoreAuth.auth().currentUser
-
+    // const history = useHistory();
+    // var user = firestoreAuth.auth().currentUser
+    //
     // function loginCheck() {
     //     if (user == null) {
     //         alert("Please Login")
@@ -47,10 +53,17 @@ const TicketForm = () => {
                 setActualDistance(value);
                 break;
 
+
             default:
                 break;
         }
     };
+
+    function onDateChange(startDate: Date) {
+        setStartDate(startDate)
+        setEndDate(new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + 7))
+    }
+
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
@@ -70,7 +83,8 @@ const TicketForm = () => {
                 predictedDistance,
                 actualDistance,
                 createdAt,
-                status: "open",
+                startDate,
+                endDate,
                 comments: [],
             })
             .then(() => {
@@ -94,6 +108,8 @@ const TicketForm = () => {
             );
     };
 
+
+    // @ts-ignore
     return (
         <div
             className={"pt-3 pl-2 pr-2 mt-5"}
@@ -102,13 +118,13 @@ const TicketForm = () => {
             <h1 className={"text-center"}>Create a New Fitness Log</h1>
             <form className={"mb-5"} onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="ticketTitle">Week Starting</label>
+                    <label htmlFor="ticketTitle">Title</label>
                     <input
                         type="text"
                         name="title"
                         className="form-control"
                         id="ticketTitle"
-                        placeholder="Insert Issue Title (Brief Description)"
+                        placeholder="Insert Log Title"
                         value={title}
                         onChange={handleChange}
                     />
@@ -135,6 +151,11 @@ const TicketForm = () => {
                         onChange={handleChange}
                     >
                     </textarea>
+                </div>
+                <div>
+                    <label htmlFor="StartDate">Pick Date</label>
+                    <br/>
+                    <DayPickerInput onDayChange={onDateChange}/>
                 </div>
                 <button type={"submit"} className={"btn btn-danger"}>
                     Submit

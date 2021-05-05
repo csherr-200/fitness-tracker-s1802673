@@ -6,6 +6,8 @@ export interface Log {
   activityGoals  : string;
   predictedDistance: string;
   actualDistance: string;
+  startDate: string;
+  endDate: string;
   owner: {
     displayName: string;
     email: string;

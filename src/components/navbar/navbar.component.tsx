@@ -45,6 +45,15 @@ const Navbar = () => {
                         </li>
                         <li
                             className={`nav-item ${
+                                history.location.pathname === "fitness-tracker/new-log" ? "active" : ""
+                            }`}
+                        >
+                            <Link to={"/fitness-tracker/compare"} className={"nav-link"}>
+                                Compare Logs <span className="sr-only">(current)</span>
+                            </Link>
+                        </li>
+                        <li
+                            className={`nav-item ${
                                 history.location.pathname === "/"
                                     ? "active"
                                     : ""
