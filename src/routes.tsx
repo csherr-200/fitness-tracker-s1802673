@@ -8,6 +8,7 @@ import {auth, createUserProfileDocument} from "./firebase/firebase.utils";
 import Login from "./components/login/login.component";
 import LogDetailsPage from "./components/log-details/log-details.component";
 import Compare from "./components/compare/compare.component"
+import RegisterAndLogin from "./components/register-and-login/register-and-login.component";
 import CurrentUserContext from "./typescript-interfaces/current-user.provider";
 import {CurrentUser} from "./typescript-interfaces/current-user.interface";
 
@@ -51,8 +52,8 @@ const Routes = () => {
                 <BrowserRouter>
                     <Navbar/>
                     <Switch>
-                        <Route exact path={"/"} component={Login}/>
-                        <Route exact path={"/fitness-tracker"} component={Login}/>
+                        <Route exact path={"/"} component={RegisterAndLogin}/>
+                        <Route exact path={"/fitness-tracker"} component={RegisterAndLogin}/>
                         <Route
                             exact
                             path={"/fitness-tracker/new-log"}
