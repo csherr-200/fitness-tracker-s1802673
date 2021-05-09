@@ -144,6 +144,10 @@ const TicketDetailsPage = () => {
 
   };
 
+  function getURL() {
+    alert("Share this Log with your Friends here: " + window.location.href);
+  }
+
   return (
       <div
           className={"pt-3 pb-3 pl-2 pr-2 mt-5 mr-3 ml-3 mb-5"}
@@ -156,6 +160,8 @@ const TicketDetailsPage = () => {
                 <button className="btn btn-warning border-dark">Edit Log</button>
               </Link>
           ) : undefined}
+          <p></p>
+                <button onClick={getURL} className="btn btn-warning border-dark">Share Log</button>
         </h2>
         <div className="card border-dark mb-5">
           <ul className="list-group">
@@ -163,16 +169,16 @@ const TicketDetailsPage = () => {
               Log ID: {ticketId}
             </li>
             <li className="list-group-item">
-              Date: {ticket.title}
+              Title: {ticket.title}
             </li>
             <li className="list-group-item">
               Activity Goals {ticket.activityGoals}
             </li>
             <li className="list-group-item">
-              Predicted Distance: {ticket.predictedDistance}
+              Predicted Distance: {ticket.predictedDistance} KM
             </li>
             <li className="list-group-item">
-                Actual Distance: {ticket.actualDistance}
+                Actual Distance: {ticket.actualDistance} KM
             </li>
             <li className="list-group-item">
               Created At: {ticket.createdAt}
@@ -203,7 +209,7 @@ const TicketDetailsPage = () => {
             return (
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
-                  <td>{comment.personName}</td>
+                  <td>{comment.email}</td>
                   <td>{comment.comment}</td>
                   <td>{comment.timestamp.toDate().toDateString()}</td>
                 </tr>

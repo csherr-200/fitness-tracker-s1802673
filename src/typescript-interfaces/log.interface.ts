@@ -20,7 +20,7 @@ export interface Log {
     statusChangedTo: string;
   }>;
   comments: Array<{
-    personName: string;
+    email: string;
     timestamp: firestore.Timestamp;
     comment: string;
   }>;

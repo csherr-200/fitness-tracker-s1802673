@@ -133,8 +133,7 @@ const Compare = () => {
             <form className={"mb-5"} onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="ticketTitle">Week Start Date</label>
-                    <input
-                        type="text"
+                    <select
                         name="title"
                         className="form-control"
                         id="ticketTitle"

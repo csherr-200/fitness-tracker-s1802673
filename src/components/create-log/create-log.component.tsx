@@ -8,6 +8,8 @@ import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css';
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
+import {useParams, useHistory} from "react-router-dom";
+import firestoreAuth from "firebase";
 
 
 const TicketForm = () => {
@@ -20,17 +22,17 @@ const TicketForm = () => {
 
     const currentUser: CurrentUser = useContext(CurrentUserContext);
 
-    // const history = useHistory();
-    // var user = firestoreAuth.auth().currentUser
-    //
-    // function loginCheck() {
-    //     if (user == null) {
-    //         alert("Please Login")
-    //         history.push("/")
-    //     }
-    // }
-    //
-    // loginCheck()
+    const history = useHistory();
+    var user = firestoreAuth.auth().currentUser
+
+    function loginCheck() {
+        if (user == null) {
+            alert("Please Login")
+            history.push("/")
+        }
+    }
+
+    loginCheck()
 
     const handleChange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -141,7 +143,7 @@ const TicketForm = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="predictedDistance">Predicted Distance</label>
+                    <label htmlFor="predictedDistance">Predicted Distance (KM)</label>
                     <textarea
                         className="form-control"
                         name="predictedDistance"
@@ -157,6 +159,7 @@ const TicketForm = () => {
                     <br/>
                     <DayPickerInput onDayChange={onDateChange}/>
                 </div>
+                <br/>
                 <button type={"submit"} className={"btn btn-danger"}>
                     Submit
                 </button>
