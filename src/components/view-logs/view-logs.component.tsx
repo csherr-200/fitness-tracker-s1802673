@@ -29,7 +29,7 @@ const ViewTickets = () => {
         }
     }
 
-    // loginCheck()
+    loginCheck()
 
     useEffect(() => {
         setTicketsList([]);

@@ -39,17 +39,17 @@ const TicketDetailsPage = () => {
     comments: [],
   });
 
-  // const history = useHistory();
-  // var user = firestoreAuth.auth().currentUser
+  const history = useHistory();
+  var user = firestoreAuth.auth().currentUser
 
-  // function loginCheck() {
-  //   if (user == null) {
-  //     alert("Please Login")
-  //     history.push("/")
-  //   }
-  // }
-  //
-  // loginCheck()
+  function loginCheck() {
+    if (user == null) {
+      alert("Please Login")
+      history.push("/")
+    }
+  }
+
+  loginCheck()
 
   useEffect(() => {
     db.collection("tickets")

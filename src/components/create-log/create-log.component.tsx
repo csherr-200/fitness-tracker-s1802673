@@ -111,7 +111,6 @@ const TicketForm = () => {
     };
 
 
-    // @ts-ignore
     return (
         <div
             className={"pt-3 pl-2 pr-2 mt-5"}

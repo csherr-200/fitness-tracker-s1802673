@@ -5,9 +5,7 @@ import EditLogs from "./components/edit-log/edit-log.component";
 import Navbar from "./components/navbar/navbar.component";
 import ViewTickets from "./components/view-logs/view-logs.component";
 import {auth, createUserProfileDocument} from "./firebase/firebase.utils";
-import Login from "./components/login/login.component";
 import LogDetailsPage from "./components/log-details/log-details.component";
-import Compare from "./components/compare/compare.component"
 import RegisterAndLogin from "./components/register-and-login/register-and-login.component";
 import CurrentUserContext from "./typescript-interfaces/current-user.provider";
 import {CurrentUser} from "./typescript-interfaces/current-user.interface";
@@ -22,8 +20,6 @@ const Routes = () => {
     });
 
     const history = useHistory();
-
-    // state = { user: null };
 
     useEffect(() => {
         const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
@@ -64,8 +60,7 @@ const Routes = () => {
                         />
                         <Route exact path={"/fitness-tracker/edit-ticket/:ticketId"} component={EditLogs}
                         />
-                        <Route exact path={"/fitness-tracker/compare"} component={Compare}
-                        />
+
                     </Switch>
                 </BrowserRouter>
             </CurrentUserContext.Provider>

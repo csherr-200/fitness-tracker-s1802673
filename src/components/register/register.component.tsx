@@ -69,7 +69,7 @@ const Register = () => {
   return (
     <div className={"text-center mb-5 mt-5"}>
       <form className="form-signin" onSubmit={handleSubmit}>
-        <h1 className="h3 mb-3 font-weight-normal">Please Register</h1>
+        <h1 className="h3 mb-3 font-weight-normal">Registration Form</h1>
         <div className="form-group">
           <label htmlFor="registerEmail" className="sr-only">
             Email address
