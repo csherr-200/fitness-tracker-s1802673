@@ -155,25 +155,27 @@ const EditTicket = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="predictedDistance">Predicted Distance</label>
-                    <textarea
+                    <input
+                        type="number"
                         className="form-control"
                         name="predictedDistance"
                         id="predictedDistance"
                         value={predictedDistance}
                         onChange={handleChange}
                     >
-                    </textarea>
+                    </input>
                 </div>
                 <div className="form-group">
                     <label htmlFor="actualDistance">Actual Distance</label>
-                    <textarea
+                    <input
+                        type="number"
                         className="form-control"
                         name="actualDistance"
                         id="actualDistance"
                         value={actualDistance}
                         onChange={handleChange}
                     >
-                    </textarea>
+                    </input>
                 </div>
                 <button type={"submit"} className={"btn btn-danger"}>
                     Submit

@@ -8,7 +8,7 @@ import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css';
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
-import {useParams, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import firestoreAuth from "firebase";
 
 
@@ -32,7 +32,7 @@ const TicketForm = () => {
         }
     }
 
-    loginCheck()
+    // loginCheck()
 
     const handleChange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -143,7 +143,8 @@ const TicketForm = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="predictedDistance">Predicted Distance (KM)</label>
-                    <textarea
+                    <input
+                        type="number"
                         className="form-control"
                         name="predictedDistance"
                         id="predictedDistance"
@@ -151,7 +152,7 @@ const TicketForm = () => {
                         value={predictedDistance}
                         onChange={handleChange}
                     >
-                    </textarea>
+                    </input>
                 </div>
                 <div>
                     <label htmlFor="StartDate">Pick Date</label>

@@ -19,9 +19,6 @@ const Routes = () => {
         myTickets: [],
     });
 
-    const history = useHistory();
-
-    // state = { user: null };
 
     useEffect(() => {
         const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
