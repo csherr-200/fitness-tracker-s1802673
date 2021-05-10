@@ -154,7 +154,7 @@ const EditTicket = () => {
                     </textarea>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="predictedDistance">Predicted Distance</label>
+                    <label htmlFor="predictedDistance">Predicted Distance (KM)</label>
                     <input
                         type="number"
                         className="form-control"
@@ -166,7 +166,7 @@ const EditTicket = () => {
                     </input>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="actualDistance">Actual Distance</label>
+                    <label htmlFor="actualDistance">Actual Distance (KM)</label>
                     <input
                         type="number"
                         className="form-control"
