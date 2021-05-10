@@ -21,6 +21,8 @@ const Routes = () => {
 
     const history = useHistory();
 
+    // state = { user: null };
+
     useEffect(() => {
         const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
             if (userAuth) {
@@ -60,7 +62,6 @@ const Routes = () => {
                         />
                         <Route exact path={"/fitness-tracker/edit-ticket/:ticketId"} component={EditLogs}
                         />
-
                     </Switch>
                 </BrowserRouter>
             </CurrentUserContext.Provider>
